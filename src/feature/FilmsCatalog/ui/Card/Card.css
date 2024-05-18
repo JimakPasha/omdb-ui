@@ -1,0 +1,48 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card__poster {
+  flex: 0 0 auto;
+}
+
+.card__info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  padding: 10px;
+}
+
+.card__poster img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.card__content {
+  flex: 1;
+  padding: 20px;
+}
+
+.card__title {
+  margin-top: 0;
+  font-size: 20px;
+}
+
+.card__details {
+  margin-top: 10px;
+}
+
+.card__details {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.card__detail {
+  font-weight: bold;
+}
