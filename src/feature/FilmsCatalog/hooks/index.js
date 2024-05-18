@@ -1,0 +1,1 @@
+export { useGetFilms } from './useGetFilms';
