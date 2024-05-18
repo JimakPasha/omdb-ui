@@ -2,26 +2,40 @@ import { useState, useEffect } from "react";
 import { getFilms } from "../../../entities";
 
 export const useGetFilms = () => {
-  const [searchData, setSearchData] = useState('');
+  const [searchData, setSearchData] = useState('Batman');
   const [page, setPage] = useState(1);
 
   const [list, setList] = useState([]);
-  const [isError, setIsError] = useState(false);
+  const [totalResults, setTotalResults] = useState('0');
+  const [isServerError, setIsServerError] = useState(false);
+  const [clientErrorMessage, setClientErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setIsLoading(true);
-    setIsError(false);
+    setIsServerError(false);
+    setClientErrorMessage('');
 
     getFilms({ searchData, page })
-        .then((data) => setList(data))
-        .catch(() => setIsError(true))
+        .then((data) => {
+          if (data.Response === 'True') {
+            setList(data.Search);
+            setTotalResults(data.totalResults);
+          } else {
+            setClientErrorMessage(data.Error);
+          }
+        })
+        .catch(() => setIsServerError(true))
         .finally(() => setIsLoading(false));
   }, [searchData, page]);
 
   const handleSearchChange = (string) => setSearchData(string);
 
-  const handlePageChange = (pageNumber) => setPage(pageNumber);
+  const handlePageClick = (pageNumber) => setPage(pageNumber);
 
-  return { searchData, page, list, isLoading, isError, handleSearchChange, handlePageChange };
+  const handleNextClick = () => setPage(page + 1);
+  
+  const handlePrevClick = () => setPage(page - 1);
+
+  return { searchData, totalResults, page, list, isLoading, isServerError, clientErrorMessage, handleSearchChange, handlePageClick, handleNextClick, handlePrevClick };
 }

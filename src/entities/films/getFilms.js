@@ -7,6 +7,6 @@ export const getFilms = async ({ searchData, page }) => {
   };
 
   const { data } = await api.get('', { params });
-
+  
   return data;
 }
