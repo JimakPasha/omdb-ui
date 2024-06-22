@@ -23,6 +23,10 @@
   transition: all 0.3s ease;
 }
 
+.pagination__btn.active {
+  box-shadow: 0px 0px 15px 0px #000;
+}
+
 .pagination__btn:disabled {
   background-color: #ddd;
   opacity: 0.3;
@@ -33,7 +37,6 @@
 .pagination__btn:hover {
   background: linear-gradient(45deg, #6f95a7, #0073aa);
 }
-
 
 @media screen and (max-width: 768px) {
   .pagination {

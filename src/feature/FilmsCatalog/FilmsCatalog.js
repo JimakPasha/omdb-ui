@@ -5,18 +5,30 @@ import { Header, List, SearchResultDescription } from "./ui";
 import './FilmsCatalog.css';
 
 export const FilmsCatalog = () => {
-  const { searchData, totalResults, page, list, isLoading, isServerError, clientErrorMessage, handleSearchChange, handlePageClick, handleNextClick, handlePrevClick } = useGetFilms();
+  const { 
+    searchData,
+    totalResults,
+    page,
+    list,
+    isLoading,
+    isServerError,
+    clientErrorMessage,
+    isRenderContent,
+    handleSearchChange,
+    handlePageClick,
+    handleNextClick,
+    handlePrevClick,
+  } = useGetFilms();
 
   return (
     <>
       <Header onSearchChange={handleSearchChange} searchData={searchData} />
-
       <main className="container">
         {isLoading && <Loader />}
         {isServerError && <ErrorMessage />}
         {clientErrorMessage && <ErrorMessage message={clientErrorMessage} />}
 
-        {!isLoading && !isServerError && !clientErrorMessage && (
+        {isRenderContent && (
           <div className="content">
             <SearchResultDescription searchData={searchData} totalResults={totalResults} />
             <List list={list} />
@@ -29,7 +41,6 @@ export const FilmsCatalog = () => {
             />
           </div>
         )}
-
       </main>
     </>
   );

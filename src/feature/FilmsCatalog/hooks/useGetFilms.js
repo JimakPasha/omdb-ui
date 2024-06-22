@@ -11,6 +11,8 @@ export const useGetFilms = () => {
   const [clientErrorMessage, setClientErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const isRenderContent = !isLoading && !isServerError && !clientErrorMessage;
+
   useEffect(() => {
     setIsLoading(true);
     setIsServerError(false);
@@ -37,5 +39,18 @@ export const useGetFilms = () => {
   
   const handlePrevClick = () => setPage(page - 1);
 
-  return { searchData, totalResults, page, list, isLoading, isServerError, clientErrorMessage, handleSearchChange, handlePageClick, handleNextClick, handlePrevClick };
+  return { 
+    searchData,
+    totalResults,
+    page,
+    list,
+    isLoading,
+    isServerError,
+    clientErrorMessage,
+    isRenderContent,
+    handleSearchChange,
+    handlePageClick,
+    handleNextClick,
+    handlePrevClick,
+  };
 }
